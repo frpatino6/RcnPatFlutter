@@ -37,30 +37,32 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         key: _scaffoldKey,
-        body: Column(
-          children: <Widget>[
-            Expanded(
-              flex: 2, // takes 30% of available width
-              child: logo,
-            ),
-            Expanded(
-              flex: 1, // takes 30% of available width
-              child: title,
-            ),
-            Expanded(
-              flex: 7, // takes 70% of available width
-              child: Padding(
-                padding: EdgeInsets.all(50.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[_cardTipo1(context)],
+        body: Container(
+            padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+            alignment: Alignment.center,
+            width: double.infinity,
+            height: double.infinity,
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[logo, title],
+                  ),
+                  flex: 3, // takes 30% of available width
                 ),
-              ),
-            ),
-          ],
-        ));
+                Expanded(
+                  flex: 7, // takes 70% of available width
+                  child: Column(
+                    children: <Widget>[_cardTipo1(context)],
+                  ),
+                ),
+              ],
+            )));
   }
 
   _cardTipo1(BuildContext contextCard) {
@@ -126,22 +128,23 @@ class _LoginPageState extends State<LoginPage> {
       elevation: 50.0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40.0)),
       child: Container(
-        padding: EdgeInsets.all(20.0),
         child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(height: 10.0),
-              email,
-              SizedBox(height: 18.0),
-              password,
-              SizedBox(height: 5.0),
-              loginButton,
-            ],
-          ),
-        ),
+            key: _formKey,
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(50.0, 20, 50, 0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(height: 10.0),
+                  email,
+                  SizedBox(height: 10.0),
+                  password,
+                  SizedBox(height: 5.0),
+                  loginButton,
+                ],
+              ),
+            )),
       ),
     );
   }
@@ -150,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
     if (!_formKey.currentState.validate()) {
       // If the form is valid, display a Snackbar.
       final snackBar = SnackBar(
-        content: Text('Erro al autenticar'),
+        content: Text('Error al autenticar'),
         backgroundColor: Colors.red,
         duration: Duration(seconds: 5),
         elevation: 50.0,
